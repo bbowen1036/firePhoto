@@ -19,6 +19,14 @@ let db = {
       likeCount: 5,
       commentCount: 2
     }
+  ],
+  comments: [
+    {
+      userHandle: 'user',
+      screamId: 'WkKjrTzx2cIcESfZA2nO',
+      body: 'this is the body',
+      createdAt: '2020-12-19T00:09:45.235Z',
+    }
   ]
 }
 
@@ -37,11 +45,11 @@ const userDetails = {
   likes = [
     {
       userHandle: 'user',
-      screamId: WkKjrTzx2cIcESfZA2nO
+      screamId: 'WkKjrTzx2cIcESfZA2nO'
     },
     {
       userHandle: 'user',
-      screamId: cPJjb9q5KAVg2Geg0uYe    
+      screamId: 'cPJjb9q5KAVg2Geg0uYe'    
     }
   ]
 }
