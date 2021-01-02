@@ -17,7 +17,10 @@
     });
     return res.json(screams);
   })
-  .catch(err => console.error(err));
+  .catch(err => {
+    console.error(err);
+    return
+  });
 }
 
 exports.postOneScream = (req, res) => { 
@@ -37,11 +40,11 @@ exports.postOneScream = (req, res) => {
     .then(doc => {
       const resScream = newScream;
       resScream.screamId = doc.id;
-      res.json(resScream);
+      return res.json(resScream);
     })
     .catch(err => {
-      res.status(500).json({ error: 'something went wrong'});
-      console.error(err)
+      console.error(err);
+      return res.status(500).json({ error: 'something went wrong'})
     });
 };
 
@@ -70,7 +73,7 @@ exports.getScream = (req, res) => {
     })
     .catch(err => {
       console.error(err);
-      res.status(500).json({ error: err.code })
+      return res.status(500).json({ error: err.code })
     })
 
 };
@@ -98,11 +101,11 @@ exports.commentOnScream = (req, res) => {
       return db.collection('comments').add(newComment);
     })
     .then(() => {
-      res.json(newComment);
+      return res.json(newComment);
     })
     .catch(err => {
       console.error(err);
-      res.status(500).json({ error: 'Something went wrong' });
+      return res.status(500).json({ error: 'Something went wrong' });
     })
 };  
  
@@ -147,7 +150,7 @@ exports.likeScream = (req, res) => {   // need to check whether a liked document
     })
     .catch(err => {
       console.error(err)
-      res.status(500).json({ error: err.code })
+      return res.status(500).json({ error: err.code })
     })
 };
 
@@ -182,13 +185,13 @@ exports.unlikeScream = (req, res) => {
             return screamDocument.update({ likeCount: screamData.likeCount })
           })
           .then(() => {
-            res.json(screamData)
+           return res.json(screamData)
           })
       }
     })
     .catch(err => {
       console.error(err)
-      res.status(500).json({ error: err.code })
+      return res.status(500).json({ error: err.code })
     })
 };
 
@@ -207,7 +210,7 @@ exports.deleteScream = (req, res) => {
       }
     })
     .then(() => {
-      res.json({ message: 'Scream deleted successfully'})
+      return res.json({ message: 'Scream deleted successfully'})
     })
     .catch(err => {
       console.error(err);
